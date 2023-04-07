@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>note.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E5%88%86%E6%B2%BB%E6%B3%95">第四章 分治法</h1>
+<h2 id="part-1-%E5%88%86%E6%B2%BB%E7%AD%96%E7%95%A5">Part 1 分治策略</h2>
+<p>实现策略分三步：</p>
+<ol>
+<li>Divide 分解问题</li>
+<li>Conquer 递归地求解子问题</li>
+<li>结合基础结论or计算得出结果</li>
+</ol>
+<p>分治策略可以用递归的方式实现
+递归实现的样式：</p>
+<pre class="hljs"><code><div>function:
+    //基本情况的结果(触底后向上)
+    if base case:
+        do...
+
+    
+    //进入子问题并求解(向下)
+    else if recursion case:
+        function 
+        ...
+
+    //必要的运算后得出结果(向上)
+    make the result
+    return result
+</div></code></pre>
+<h2 id="part-2-%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95%E7%9A%84strassen%E7%AE%97%E6%B3%95">Part 2 矩阵乘法的Strassen算法</h2>
+<p><strong>一般算法：</strong><br>
+<img src="./pic/Recursive1.png" alt=""></p>
+<p><strong>Strassen算法的思路：</strong><br>
+$$
+a^2-b^2 = (a+b)*(a-b)
+$$</p>
+<p><strong>Strassen的做法</strong></p>
+<ol>
+<li>
+<p>把每个矩阵拆成四个矩阵</p>
+</li>
+<li>
+<p>计算10个矩阵加法，产生10个新矩阵<br>
+<img src="./pic/recursiveDo1.png" alt=""></p>
+</li>
+<li>
+<p>计算7个矩阵乘法(递归)，产生7个新矩阵<br>
+<img src="./pic/recursiveDo2.png" alt=""></p>
+</li>
+<li>
+<p>计算好多个矩阵加法，修改原矩阵的内容<br>
+<img src="./pic/recursiveDo3.png" alt=""></p>
+</li>
+</ol>
+<p>该算法时间复杂度的递推式如下图：<br>
+<img src="./pic/TimeRecersive.png" alt=""><br>
+书上所说：Strassen算法的时间复杂度为：<br>
+$$
+T(n) = \Theta(n^{\log_2 7})
+$$</p>
+<h2 id="part-3-%E5%88%86%E6%B2%BB%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90">Part 3 分治法的时间复杂度分析</h2>
+<p><strong>递归树</strong><br>
+栗子:<br>
+$$
+T(n) = 3T(n/4)+cn^2
+$$
+<img src="./pic/recursionTree.png" alt=""><br>
+<img src="./pic/recursionTreeExample.png" alt=""></p>
+<h3 id="%E9%97%AE%E9%A2%981-%E4%BB%BF%E7%85%A7%E4%B8%8A%E9%9D%A2%E7%9A%84%E6%8E%A8%E5%AF%BC%E8%83%BD%E5%90%A6%E7%B1%BB%E4%BC%BC%E7%94%BB%E5%87%BAstrassen%E7%AE%97%E6%B3%95%E7%9A%84%E9%80%92%E5%BD%92%E6%A0%91%E6%B1%82%E5%87%BAstrassen%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6">问题1： 仿照上面的推导，能否类似画出strassen算法的递归树，求出strassen的时间复杂度？</h3>
+<p>尝试推导通式：<br>
+$$
+T(n)=aT(n/b)+cn^d
+$$
+画图<br>
+<img src="./pic/recursiveTreeYes.jpg" alt=""><br>
+有：<br>
+$$
+T(n) = a^{\log_b n}T(1) + \Sigma_{i=0}^{\log_b n -1}[c(n/b^i)^d~a^{i}]
+$$
+提取系数：<br>
+$$
+T(n) = c_2 n^{\log_b a} + c n^d
+\Sigma_{i=0}^{\log_b n -1}(a/b^d)^i
+$$
+<strong>若(a/b^d = 1),则：</strong><br>
+$$
+T(n) = c_2 n^d +cn^d\log_b n = \Theta(n^d\log_b n)
+$$
+否则，等比数列求和：<br>
+$$
+T(n) =  c_2 n^{log_b a} + c_1 n^d[1-(a/b^d)^{\log_b n}]/(1-a/b^d)
+$$
+化简：<br>
+$$
+T(n) =  c_2 n^{log_b a} + c_1/(1-a/b^d)~ n^d[1-(a/b^d)^{\log_b n}]
+$$</p>
+<p>$$
+T(n) =  c_2 n^{log_b a} + c_1/(1-a/b^d)~ n^d[1-n^{\log_b a -d}]
+$$
+$$
+T(n) =  c_2 n^{log_b a} + c_1/(1-a/b^d)~ n^d - c_1/(1-a/b^d)n^{\log_b a}
+$$
+$$
+T(n) =  [1- c_1/(1-a/b^d)]~ n^d - c_1/(c_2-a/b^d)n^{\log_b a}
+$$</p>
+<h4 id="%E9%87%8D%E7%82%B9%E5%88%A4%E6%96%AD%E7%AC%A6%E5%8F%B7">重点(判断符号)</h4>
+<p><strong>当a &lt; b^d,即\log_b a &lt; d:</strong><br>
+(1-a/b^d) &lt; 0
+$$
+T(n) = \Theta(n^d)
+$$</p>
+<p><strong>当a &gt; b^d,即\log_b a &gt; d:</strong><br>
+(1-a/b^d) &gt; 0
+$$
+T(n) = \Theta(n^{\log_a b})
+$$</p>
+<p>而这，就是<strong>4-5中的主方法</strong>的结论</p>
+<p>Strassen算法通过减少树的分支(bush)使得计算量下降<br>
+下面是一些常见的形式，代入上面的式子也能得到相应的形式：
+<img src="./pic/TimeType.png" alt=""></p>
+<h2 id="part-4-%E4%B8%BB%E6%96%B9%E6%B3%95%E7%9A%84%E8%AF%81%E6%98%8E%E6%B2%A1%E9%82%A3%E4%B8%AA%E8%83%BD%E5%8A%9B%E6%95%85%E7%95%A5">Part 4 主方法的证明(没那个能力,故略)</h2>
+
+</body>
+</html>
